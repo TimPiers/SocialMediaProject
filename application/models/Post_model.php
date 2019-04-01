@@ -11,6 +11,7 @@
 				$this->db->from('posts');
 				$this->db->join('users', '`posts`.`PosterId` = `users`.`id`');
 				$this->db->where(array('PosterId' => $PosterId));
+				$this->db->order_by('DatePosted', 'desc');
 				$query = $this->db->get();
 
 				return $query->result_array();
@@ -18,6 +19,18 @@
 			
 			return array();
 		}
+
+		public function post($message){
+			$data = array(
+				'PosterId' => $this->session->userdata('id'),
+				'Content' => $message,
+				'Image' => null,
+				'DatePosted' => date("Y-m-d H:i:s")
+			);
+
+			return $this->db->insert('posts', $data);
+		}
+
 
 	}
 ?>

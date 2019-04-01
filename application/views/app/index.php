@@ -38,13 +38,14 @@
 </div>
 
 <div class="container">
+<?php echo form_open('posts/post'); ?>
   <div class="card">
     <div class="card-body">
     <h6>Plaats een bericht</h6>
     <div class="row">
       <div class="col-12 col-lg-11">
         <div class="form-group">
-          <textarea class="form-control" id="inputPost" rows="4" style="resize: none; "></textarea>
+          <textarea class="form-control" id="inputPost" rows="4" name="message" style="resize: none; "></textarea>
         </div>
       </div>
       <div class="col-12 col-lg-1">
@@ -52,4 +53,5 @@
       </div>
     </div>
   </div>
+  <?php echo form_close(); ?>
 </div>

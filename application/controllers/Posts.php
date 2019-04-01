@@ -11,4 +11,15 @@ class Posts extends CI_Controller {
 		$this->load->view('posts/index', $data);
 		$this->load->view('templates/footer');
 	}
+
+	public function post(){
+		$this->form_validation->set_rules('message', 'Message', 'required');
+
+		if($this->form_validation->run() === FALSE){
+			redirect('app/index');
+		}else {
+			$this->post_model->post($this->input->post('message'));
+			redirect('app/index');
+		}
+	}
 }

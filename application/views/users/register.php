@@ -51,3 +51,9 @@
       </div>
     </div>
   </div>
+
+  <?php
+    if($this->session->userdata('logged_in')){
+      redirect('app/index');
+    } 
+  ?>
