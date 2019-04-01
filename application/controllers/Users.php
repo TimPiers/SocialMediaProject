@@ -61,6 +61,13 @@ class Users extends CI_Controller {
 		}
 	}
 
+	public function logout(){
+		$this->session->unset_userdata('id');
+		$this->session->unset_userdata('email');
+		$this->session->unset_userdata('logged_in');
+		redirect('users/login');
+	}
+
 	public function check_email_exists($email){
 		$this->form_validation->set_message('check_email_exists', 'That email adress has already been taken.');	
 		if($this->user_model->check_email_exists($email)){

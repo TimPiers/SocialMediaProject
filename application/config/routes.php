@@ -57,6 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 /* Custom Routes */
 $route['posts'] = 'posts/index';
+$route['app'] = 'app/index';
 
 
 /* Any route */
