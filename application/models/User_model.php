@@ -25,7 +25,7 @@
 			$this->db->where('password', $enc_password);
 
 			$result = $this->db->get('users');
-
+			
 			if($result->num_rows() === 1) {
 				return $result->row(0)->id;
 			}else {
