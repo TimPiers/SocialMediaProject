@@ -1,5 +1,4 @@
-<div class="container">
-  <h2>Posts</h2>
+<div class="container mt-5">
   <?php foreach($posts as $post) : ?>
     <div class="card">
       <div class="card-body">

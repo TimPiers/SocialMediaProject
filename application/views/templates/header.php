@@ -11,6 +11,10 @@
 	<script src="https://unpkg.com/scrollreveal"></script>
 	<script src="<?php echo base_url().'assets/js/countup.js'; ?>"></script>
 	<style type="text/css">
+		body {
+			background-color: #474787; 
+		}
+
 		label {
 			margin: 0;
 			margin-top: 10px;

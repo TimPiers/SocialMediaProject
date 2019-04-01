@@ -29,7 +29,7 @@
     border-radius: 10px;
     padding: 5px;
     text-align: center;
-    color: #1e272e;
+    color: #474787;
   }
 
   p.info {

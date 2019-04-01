@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
       <div class="col-sm-12 col-md-10 col-lg-8 mx-auto">
-        <div class="card my-5" style="box-shadow: 1px 2px #dbdbdb;">
+        <div class="card my-5" style="box-shadow: 3px 3px #2c2c54;">
           <div class="card-body">
           <h5 class="card-title text-center">Sign Up</h5>
             <?php echo '<span class="text-danger">'.validation_errors().'</span>'; ?>

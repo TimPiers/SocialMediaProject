@@ -10,6 +10,7 @@
 				$this->db->select('`posts`.`PosterId`, `users`.`Name`, `users`.`Lastname`, `posts`.`Content`, `posts`.`Image`, `posts`.`DatePosted`');
 				$this->db->from('posts');
 				$this->db->join('users', '`posts`.`PosterId` = `users`.`id`');
+				$this->db->where(array('PosterId' => $PosterId));
 				$query = $this->db->get();
 
 				return $query->result_array();
