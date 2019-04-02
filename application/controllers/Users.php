@@ -93,6 +93,16 @@ class Users extends CI_Controller {
 		}
 	}
 
+	public function acceptFriend($requestId){
+		$this->user_model->acceptFriend($requestId, $this->session->userdata('id'));
+		redirect('app/friends');
+	}
+
+	public function removeFriend($requestId){
+		$this->user_model->removeFriend($requestId, $this->session->userdata('id'));
+		redirect('app/friends');
+	}
+
 	public function logout(){
 		$this->session->unset_userdata('id');
 		$this->session->unset_userdata('email');

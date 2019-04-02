@@ -51,6 +51,17 @@
 			return $query->result_array();
 		}
 
+		public function acceptFriend($requester, $accepter){
+			$this->db->set('Accepted', 1);
+			$this->db->where("RequesterId = $requester OR AccepterId = $accepter");
+			$this->db->update('Friends'); 
+		}
+
+		public function removeFriend($requester, $accepter){
+			$this->db->where("RequesterId = $requester OR AccepterId = $accepter");
+			$this->db->delete('Friends');
+		}
+
 		public function getUser($id){
 			$this->db->select('*');
 			$this->db->from('users');
@@ -70,7 +81,7 @@
 		public function confirmResetPassword($email, $password){
 			$this->db->set('Password', $password);
 			$this->db->where('Email', $email);
-			$this->db->update('Users'); // gives UPDATE mytable SET field = field+1 WHERE id = 2
+			$this->db->update('Users'); 
 			redirect('users/login');
 		}
 

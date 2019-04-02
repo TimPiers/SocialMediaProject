@@ -55,8 +55,8 @@
 							$requester = $this->user_model->getUser($request['RequesterId'])[0];
 							echo '<hr>';
 							echo '<div class="request">';
-							echo '<i class="far fa-times-circle float-right clickable text-danger"></i>';
-							echo '<i class="far fa-check-circle float-right mr-2 clickable text-success"></i>';
+							echo '<i class="far fa-times-circle float-right clickable text-danger" onClick="removeFriend('.$requester['id'].')"></i>';
+							echo '<i class="far fa-check-circle float-right mr-2 clickable text-success" onClick="acceptFriend('.$requester['id'].')"></i>';
 							echo '<p>'.$requester['Name'].' '.$requester['Lastname'].' ('.$requester['City'].')</p>';
 							echo '</div>';
 						}
@@ -104,5 +104,13 @@
 <script type="text/javascript">
 	function inbox(id){
 		alert(id);
+	}
+
+	function acceptFriend(id){
+		window.location.href = "<?php echo base_url().'users/acceptFriend/'?>" + id;
+	}
+
+	function removeFriend(id){
+		window.location.href = "<?php echo base_url().'users/removeFriend/'?>" + id;
 	}
 </script>
