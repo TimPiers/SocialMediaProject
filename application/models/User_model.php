@@ -33,6 +33,13 @@
 			}
 		}
 
+		public function resetPassword($email){
+			$msg = "<h1>SocialMedia</h1>\nPassword reset email for: ".$email."\nIf you want to reset your password <a href=\"".base_url()."users/password?hash=".hash("sha256", $email)."\">click here</a>";
+			//$msg = wordwrap($msg, 70);
+			die($msg);
+			//mail($email, "SocialMedia - Password reset", $msg);
+		}
+
 		public function check_email_exists($email){
 			$query = $this->db->get_where('users', array('email' => $email));
 			if(empty($query->row_array())){

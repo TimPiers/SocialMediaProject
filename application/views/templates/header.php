@@ -32,6 +32,10 @@
 		.row {
 			margin: 0;
 		}
+
+		.clickable {
+			cursor: pointer;
+		}
 	</style>
 </head>
 <body>
