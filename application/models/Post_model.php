@@ -8,10 +8,9 @@
 		public function get_posts($PosterId = 0){
 			if($PosterId !== 0){
 				$friends = $this->user_model->getFriends($PosterId);
-
 				$friendsString = $PosterId.'';
 				foreach ($friends as $friend) {
-					$friendsString = $friendsString.' OR '.($PosterId == $friend['AccepterId'] ? $friend['RequesterId'] : $friend['AccepterId']);
+					$friendsString = $friendsString.' OR `posts`.`PosterId`='.($PosterId == $friend['AccepterId'] ? $friend['RequesterId'] : $friend['AccepterId']);
 				}
 				$this->db->select('`posts`.`PosterId`, `users`.`Name`, `users`.`Lastname`, `posts`.`Content`, `posts`.`Image`, `posts`.`DatePosted`');
 				$this->db->from('posts');
@@ -19,7 +18,6 @@
 				$this->db->where('`posts`.`PosterId` = '.$friendsString);
 				$this->db->order_by('DatePosted', 'desc');
 				$query = $this->db->get();
-
 				return $query->result_array();
 			}
 			
