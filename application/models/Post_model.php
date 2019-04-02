@@ -8,6 +8,7 @@
 		public function get_posts($PosterId = 0){
 			if($PosterId !== 0){
 				$friends = $this->user_model->getFriends($PosterId);
+
 				$friendsString = $PosterId.'';
 				foreach ($friends as $friend) {
 					$friendsString = $friendsString.' OR '.($PosterId == $friend['AccepterId'] ? $friend['RequesterId'] : $friend['AccepterId']);

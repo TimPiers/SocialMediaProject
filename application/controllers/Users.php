@@ -78,6 +78,21 @@ class Users extends CI_Controller {
 		}
 	}
 
+	public function resetPassword(){
+		
+		$data['title'] = "SocialMedia - Reset password";
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		if($this->form_validation->run() === FALSE){
+			$this->load->view('templates/header', $data);
+			$this->load->view('users/reset', $data);
+			$this->load->view('templates/footer');
+		}else {
+			$this->user_model->confirmResetPassword(base64_decode($this->input->post('hash')), hash('sha256', $this->input->post('password')));
+
+			redirect('users/login');
+		}
+	}
+
 	public function logout(){
 		$this->session->unset_userdata('id');
 		$this->session->unset_userdata('email');

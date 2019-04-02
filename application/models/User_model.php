@@ -36,8 +36,16 @@
 		public function getFriends($id){
 			$this->db->select('*');
 			$this->db->from('friends');
-			$this->db->where("RequesterId = $id OR AccepterId = $id");
+			$this->db->where("Accepted = 1 AND (RequesterId = $id OR AccepterId = $id)");
+			$query = $this->db->get();
 
+			return $query->result_array();
+		}
+
+		public function getFriendRequests($id){
+			$this->db->select('*');
+			$this->db->from('friends');
+			$this->db->where("Accepted = 0 AND AccepterId = $id");
 			$query = $this->db->get();
 
 			return $query->result_array();
@@ -53,10 +61,17 @@
 		}
 
 		public function resetPassword($email){
-			$msg = "<h1>SocialMedia</h1>\nPassword reset email for: ".$email."\nIf you want to reset your password <a href=\"".base_url()."users/password?hash=".hash("sha256", $email)."\">click here</a>";
+			$msg = "<h1>SocialMedia</h1>\nPassword reset email for: ".$email."\nIf you want to reset your password <a href=\"".base_url()."users/resetPassword?hash=".base64_encode($email)."\">click here</a>";
 			//$msg = wordwrap($msg, 70);
 			die($msg);
 			//mail($email, "SocialMedia - Password reset", $msg);
+		}
+
+		public function confirmResetPassword($email, $password){
+			$this->db->set('Password', $password);
+			$this->db->where('Email', $email);
+			$this->db->update('Users'); // gives UPDATE mytable SET field = field+1 WHERE id = 2
+			redirect('users/login');
 		}
 
 		public function check_email_exists($email){

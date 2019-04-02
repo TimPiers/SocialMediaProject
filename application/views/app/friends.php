@@ -2,22 +2,75 @@
 	.user-info > p, .user-info > hr {
 		margin: 0;
 	}
+
+	.request p {
+		margin: 0;
+	}
+
+	.requests hr {
+		border-top: 1px solid #888;
+		margin: 0;
+	}
+
+	.request {
+		border-bottom: 1px solid #888;
+		padding: 5px 0;
+	}
+
+	.request i {
+		position: relative;
+		top: 5px;
+	}
 </style>
 
 <div class="row mt-3">
 	<div class="col-12 col-lg-4 mb-3">
-		<div class="card">
-			<div class="card-body user-info">
-				<?php 
-					$user = $this->user_model->getUser($this->session->userdata('id'))[0]; 
-					echo '<h6>'.$user['Name'].' '.$user['Lastname'].'</h6>';
-					echo '<hr>';
-					echo '<p>Email: '.$user['Email'].'</p>';
-					echo '<p>Adress: '.$user['Adress'].', '.$user['City'].'</p>';
-					echo '<p>Hobby\'s: '.$user['Hobby'].'</p>';
-				?>
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-body user-info">
+					<?php 
+						$user = $this->user_model->getUser($this->session->userdata('id'))[0]; 
+						echo '<h6>'.$user['Name'].' '.$user['Lastname'].'</h6>';
+						echo '<hr>';
+						echo '<p>Email: '.$user['Email'].'</p>';
+						echo '<p>Adress: '.$user['Adress'].', '.$user['City'].'</p>';
+						echo '<p>Hobby\'s: '.$user['Hobby'].'</p>';
+					?>
+				</div>
 			</div>
 		</div>
+		<div class="col-12 mt-3">
+			<div class="card">
+				<div class="card-body">
+					<h6>Incomming requests</h6>
+					<div class="requests">
+					
+					<?php 
+					$requests = $this->user_model->getFriendRequests($this->session->userdata('id'));
+					if(empty($requests)){
+						echo '<p>None</p>';
+					}else{
+						foreach ($requests as $request) {
+							$requester = $this->user_model->getUser($request['RequesterId'])[0];
+							echo '<hr>';
+							echo '<div class="request">';
+							echo '<i class="far fa-times-circle float-right clickable text-danger"></i>';
+							echo '<i class="far fa-check-circle float-right mr-2 clickable text-success"></i>';
+							echo '<p>'.$requester['Name'].' '.$requester['Lastname'].' ('.$requester['City'].')</p>';
+							echo '</div>';
+						}
+					}
+					?>
+					<!--
+					
+					-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	</div>
 	<div class="col-12 col-lg-8">
 		<div class="row">
