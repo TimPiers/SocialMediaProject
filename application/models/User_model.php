@@ -33,6 +33,15 @@
 			}
 		}
 
+		public function getUser($id){
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where(array('Id' => $id));
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
 		public function resetPassword($email){
 			$msg = "<h1>SocialMedia</h1>\nPassword reset email for: ".$email."\nIf you want to reset your password <a href=\"".base_url()."users/password?hash=".hash("sha256", $email)."\">click here</a>";
 			//$msg = wordwrap($msg, 70);

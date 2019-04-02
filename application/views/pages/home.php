@@ -92,9 +92,9 @@
 <article>
 <br>
 <div class="row">
-  <div class="scroll-late col-12 offset-md-1 col-md-4 text-center text-md-left mt-5">
+  <div class="scroll-late mensen col-12 offset-md-1 col-md-4 text-center text-md-left mt-5">
     <h1>Meld jezelf aan!</h1>
-    <p>Al meer dan <span id="mensen">-1</span>+ mensen hebben zich aangemeld. Dus waarom jij niet?</p>
+    <p>Al meer dan <span id="mensen">40000</span>+ mensen hebben zich aangemeld. Dus waarom jij niet?</p>
     <a href="<?php echo base_url().'users/register'; ?>" class="btn btn-lg btn-primary">Sign up</a>
   </div>
 
@@ -123,14 +123,20 @@
   ScrollReveal().reveal('.scroll-slow', { delay: 150 });
   ScrollReveal().reveal('.scroll-late', { delay: 300 });
 
-  let demo = new CountUp('mensen', 0, 55000, 0, 5, {
-    separator: '.'
-  });
-  if (!demo.error) {
-    demo.start();
-  } else {
-    console.error(demo.error);
-  }
+  let x = setInterval(function(){ 
+    if($('.mensen').attr('style') != "visibility: visible; opacity: 0;"){
+      let demo = new CountUp('mensen', 40000, 50000, 0, 2, {
+          separator: '.'
+        });
+
+        if (!demo.error) {
+          demo.start();
+        } else {
+          console.error(demo.error);
+        }
+        clearInterval(x);
+      }
+  }, 1000);
 
 
 </script>

@@ -1,12 +1,21 @@
 <style type="text/css">
-	
+	.user-info > p, .user-info > hr {
+		margin: 0;
+	}
 </style>
 
-<div class="row">
+<div class="row mt-3">
 	<div class="col-12 col-lg-4 mb-3">
 		<div class="card">
-			<div class="card-body">
-				<p>Email: <?php echo $this->session->userdata('email'); ?></p>
+			<div class="card-body user-info">
+				<?php 
+					$user = $this->user_model->getUser($this->session->userdata('id'))[0]; 
+					echo '<h6>'.$user['Name'].' '.$user['Lastname'].'</h6>';
+					echo '<hr>';
+					echo '<p>Email: '.$user['Email'].'</p>';
+					echo '<p>Adress: '.$user['Adress'].', '.$user['City'].'</p>';
+					echo '<p>Hobby\'s: '.$user['Hobby'].'</p>';
+				?>
 			</div>
 		</div>
 	</div>
