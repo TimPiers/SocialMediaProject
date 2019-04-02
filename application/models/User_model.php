@@ -33,6 +33,16 @@
 			}
 		}
 
+		public function getFriends($id){
+			$this->db->select('*');
+			$this->db->from('friends');
+			$this->db->where("RequesterId = $id OR AccepterId = $id");
+
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
 		public function getUser($id){
 			$this->db->select('*');
 			$this->db->from('users');
