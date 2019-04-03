@@ -9,10 +9,12 @@
 </style>
 
 <div class="container mt-3">
+<?php echo form_open('app/searchFriend'); ?>
   <div class="form-group">
-    <input type=ext" class="form-control" id="inputSearch" placeholder="Zoeken..." name="search" style="width:80%; display: inline-block; margin-left: 1.5%">
+    <input type=ext" class="form-control" id="inputSearch" placeholder="Zoeken..." name="search" style="width:80%; display: inline-block; margin-left: 1.5%" required> 
     <button class="btn btn-lg btn-primary"  style="width:15%; position: relative; top: -2.5px;"><i class="fa fa-search"></i></button>
   </div>
+<?php echo form_close(); ?>
 </div>
 
 <div class="container">

@@ -42,6 +42,15 @@
 			return $query->result_array();
 		}
 
+		public function searchFriend($search){
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where("CONCAT(Name, ' ', Lastname) LIKE '%$search%' OR hobby LIKE '%$search%'");
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
 		public function getFriendRequests($id){
 			$this->db->select('*');
 			$this->db->from('friends');
@@ -51,15 +60,27 @@
 			return $query->result_array();
 		}
 
+
+		public function sendRequest($id, $RequesterId){
+			// User data array
+			$data = array(
+				'RequesterId' => $RequesterId,
+				'AccepterId' => $id,
+				'Accepted' => 0
+			);
+
+			return $this->db->insert('friends', $data);
+		}
+
 		public function acceptFriend($requester, $accepter){
 			$this->db->set('Accepted', 1);
-			$this->db->where("RequesterId = $requester OR AccepterId = $accepter");
-			$this->db->update('Friends'); 
+			$this->db->where("RequesterId = $requester AND AccepterId = $accepter");
+			$this->db->update('friends'); 
 		}
 
 		public function removeFriend($requester, $accepter){
-			$this->db->where("RequesterId = $requester OR AccepterId = $accepter");
-			$this->db->delete('Friends');
+			$this->db->where("RequesterId = $requester AND AccepterId = $accepter");
+			$this->db->delete('friends');
 		}
 
 		public function getUser($id){
@@ -81,7 +102,7 @@
 		public function confirmResetPassword($email, $password){
 			$this->db->set('Password', $password);
 			$this->db->where('Email', $email);
-			$this->db->update('Users'); 
+			$this->db->update('users'); 
 			redirect('users/login');
 		}
 
@@ -92,6 +113,27 @@
 			}else {
 				return false;
 			}
+		}
+
+		public function getMessages($id, $friendId){
+			$this->db->select('*');
+			$this->db->from('message');
+			$this->db->where("(Sender = $id AND Reciever = $friendId) OR (Sender = $friendId AND Reciever = $id)");
+			$this->db->order_by('Date', 'desc');
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+		public function sendMessage($id, $friendId, $message){
+			$data = array(
+				'Sender' => $id,
+				'Reciever' => $friendId,
+				'Message' => $message,
+				'Date' => date("Y-m-d H:i:s")
+			);
+
+			return $this->db->insert('message', $data);
 		}
 	}
 ?>

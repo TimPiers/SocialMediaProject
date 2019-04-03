@@ -93,6 +93,11 @@ class Users extends CI_Controller {
 		}
 	}
 
+	public function sendRequest($requestId){
+		$this->user_model->sendRequest($requestId, $this->session->userdata('id'));
+		redirect('app/index');
+	}
+
 	public function acceptFriend($requestId){
 		$this->user_model->acceptFriend($requestId, $this->session->userdata('id'));
 		redirect('app/friends');
@@ -119,4 +124,5 @@ class Users extends CI_Controller {
 		}
 		
 	}
+
 }

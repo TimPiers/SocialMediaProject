@@ -12,7 +12,7 @@
 				foreach ($friends as $friend) {
 					$friendsString = $friendsString.' OR `posts`.`PosterId`='.($PosterId == $friend['AccepterId'] ? $friend['RequesterId'] : $friend['AccepterId']);
 				}
-				$this->db->select('`posts`.`PosterId`, `users`.`Name`, `users`.`Lastname`, `posts`.`Content`, `posts`.`Image`, `posts`.`DatePosted`');
+				$this->db->select('`posts`.`Id`, `posts`.`PosterId`, `users`.`Name`, `users`.`Lastname`, `posts`.`Content`, `posts`.`Image`, `posts`.`DatePosted`');
 				$this->db->from('posts');
 				$this->db->join('users', '`posts`.`PosterId` = `users`.`id`');				
 				$this->db->where('`posts`.`PosterId` = '.$friendsString);
@@ -35,6 +35,9 @@
 			return $this->db->insert('posts', $data);
 		}
 
-
+		public function deletePost($id){
+			$this->db->where("Id = $id");
+			$this->db->delete('posts');
+		}
 	}
 ?>

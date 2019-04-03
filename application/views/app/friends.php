@@ -103,7 +103,7 @@
 
 <script type="text/javascript">
 	function inbox(id){
-		alert(id);
+		window.location.href = "<?php echo base_url().'app/messages/'?>" + id;
 	}
 
 	function acceptFriend(id){
