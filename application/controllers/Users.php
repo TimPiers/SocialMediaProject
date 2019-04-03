@@ -4,13 +4,13 @@ class Users extends CI_Controller {
 	public function register() {
 		$data['title'] = "SocialMedia - Sign up";
 
-		$this->form_validation->set_rules('name', 'Name', 'required');
-		$this->form_validation->set_rules('lastname', 'Lastname', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required|callback_check_email_exists');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-		$this->form_validation->set_rules('hobby', 'Hobby', 'required');
-		$this->form_validation->set_rules('city', 'City', 'required');
-		$this->form_validation->set_rules('adress', 'Adress', 'required');
+		$this->form_validation->set_rules('name', 'Name', 'required|strip_tags');
+		$this->form_validation->set_rules('lastname', 'Lastname', 'required|strip_tags');
+		$this->form_validation->set_rules('email', 'Email', 'required|callback_check_email_exists|strip_tags');
+		$this->form_validation->set_rules('password', 'Password', 'required|strip_tags');
+		$this->form_validation->set_rules('hobby', 'Hobby', 'required|strip_tags');
+		$this->form_validation->set_rules('city', 'City', 'required|strip_tags');
+		$this->form_validation->set_rules('adress', 'Adress', 'required|strip_tags');
 
 		if($this->form_validation->run() === FALSE){
 			$this->load->view('templates/header', $data);
@@ -29,8 +29,8 @@ class Users extends CI_Controller {
 	public function login() {
 		$data['title'] = "SocialMedia - Sign in";
 
-		$this->form_validation->set_rules('email', 'Email', 'required');
-		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required|strip_tags');
+		$this->form_validation->set_rules('password', 'Password', 'required|strip_tags');
 
 		if($this->form_validation->run() === FALSE){
 			$this->load->view('templates/header', $data);
@@ -63,7 +63,7 @@ class Users extends CI_Controller {
 
 	public function forgotPassword(){
 		$data['title'] = "SocialMedia - Forgot password";
-		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required|strip_tags');
 		
 		if($this->form_validation->run() === FALSE){
 			$this->load->view('templates/header', $data);

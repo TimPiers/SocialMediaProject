@@ -13,7 +13,7 @@ class Posts extends CI_Controller {
 	}
 
 	public function post(){
-		$this->form_validation->set_rules('message', 'Message', 'required');
+		$this->form_validation->set_rules('message', 'Message', 'required|strip_tags');
 
 		if($this->form_validation->run() === FALSE){
 			redirect('app/index');

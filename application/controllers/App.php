@@ -26,7 +26,7 @@ class App extends CI_Controller {
 
 	public function searchFriend(){
 		$data['title'] = "SocialMedia - App v0.1";
-		$this->form_validation->set_rules('search', 'Search', 'required');
+		$this->form_validation->set_rules('search', 'Search', 'required|strip_tags');
 		
 		if($this->form_validation->run() === FALSE){
 			$this->load->view('templates/header', $data);
@@ -58,7 +58,7 @@ class App extends CI_Controller {
 	}
 
 	public function sendMessage(){
-		$this->form_validation->set_rules('message', 'Message', 'required');
+		$this->form_validation->set_rules('message', 'Message', 'required|strip_tags');
 		if($this->form_validation->run() === FALSE){
 			redirect('app/messages/'.$this->input->post('hash'));
 		}else {
